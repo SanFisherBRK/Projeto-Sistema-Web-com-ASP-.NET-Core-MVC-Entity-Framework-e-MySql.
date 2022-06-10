@@ -13,7 +13,7 @@ namespace SalesWebMvc.Controllers
         //Declarando uma dependencia para o SellerService
         private readonly SellerService _sellerService;
 
-        //Criando o contrutor para injetar a dependencia.
+        //Criando o construtor para injetar a dependencia.
         public SellersController(SellerService sellerService)
         {
             _sellerService = sellerService;
