@@ -31,5 +31,19 @@ namespace SalesWebMvc.Services
             //salvando no banco de dados
             _context.SaveChanges();
         }
+
+        //Procurar o vendedor pelo id digitado
+        public Seller FindById(int id)
+        {
+            return _context.Seller.FirstOrDefault(obj => obj.Id == id); 
+        }
+
+        //Remove o vendedor cujo id seja igual ao digitado
+        public void Remove(int id)
+        {
+            var obj = _context.Seller.Find(id);
+            _context.Seller.Remove(obj);
+            _context.SaveChanges();
+        }
     }
 }
