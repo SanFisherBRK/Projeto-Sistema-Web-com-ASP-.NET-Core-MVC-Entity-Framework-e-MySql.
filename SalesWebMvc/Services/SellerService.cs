@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SalesWebMvc.Data;
 using SalesWebMvc.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWebMvc.Services
 {
@@ -35,7 +36,8 @@ namespace SalesWebMvc.Services
         //Procurar o vendedor pelo id digitado
         public Seller FindById(int id)
         {
-            return _context.Seller.FirstOrDefault(obj => obj.Id == id); 
+            //Faz o Join entre duas tabelas mescla dados para monstrar o nome do departamento
+            return _context.Seller.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id); 
         }
 
         //Remove o vendedor cujo id seja igual ao digitado
