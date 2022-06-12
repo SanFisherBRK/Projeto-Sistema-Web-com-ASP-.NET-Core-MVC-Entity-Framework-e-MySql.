@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SalesWebMvc.Services;
 using SalesWebMvc.Models;
+using SalesWebMvc.Models.ViewModel;
 
 namespace SalesWebMvc.Controllers
 {
@@ -12,11 +13,14 @@ namespace SalesWebMvc.Controllers
     {
         //Declarando uma dependencia para o SellerService
         private readonly SellerService _sellerService;
+        private readonly DepartmentsService _departmentService;
+
 
         //Criando o construtor para injetar a dependencia.
-        public SellersController(SellerService sellerService)
+        public SellersController(SellerService sellerService, DepartmentsService departmentsService)
         {
             _sellerService = sellerService;
+            _departmentService = departmentsService;
         }
 
         public IActionResult Index() //Vai chamar nossa operação FindAll() lá da nossa classe SellerService
@@ -28,7 +32,9 @@ namespace SalesWebMvc.Controllers
         //Tipo de retorno de todas as ações
         public IActionResult Create()
         {
-            return View();
+            var departments = _departmentService.FindAll();
+            var ViewModel = new SellerFormViewModel { Departments = departments };
+            return View(ViewModel);
         }
 
         [HttpPost]
