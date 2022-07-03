@@ -2,7 +2,8 @@
 using SalesWebMvc.Models;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWebMvc.Services
 {
@@ -18,9 +19,9 @@ namespace SalesWebMvc.Services
         }
 
         //Metodo para retornar os Departamentos ordenados por Nome
-        public List<Department> FindAll()
+        public async Task<List<Department>> FindAllAsync() //A palavra "async Task "no começo do metodo faz ele virar asyncrono
         {
-            return _context.Department.OrderBy(x => x.Name).ToList();
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync(); //await avisa ao compilador que essa é uma chamada asyncrona
         }
     }
 }
